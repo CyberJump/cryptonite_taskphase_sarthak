@@ -1,6 +1,6 @@
 # FORENSICS
 
-# Trivial Flag Transfer Protocol
+# 1)Trivial Flag Transfer Protocol
 
 So When we open the challenge we are given with a PCAPNG file.
 so searched up whats a pcapng file and found out its packet capture file and we can analyse it using wireshark
@@ -71,7 +71,7 @@ Wooooow that was a long and strenuos chall to first understand wireshark and the
 
 BUT at the end the flag gave me the adrenaline rush required 🤠
 
-# T3nnel_v1s10n
+# 2)T3nnel_v1s10n
 
 In this challenge we are given with a file and we have to recover the flag from that file. 
 
