@@ -213,3 +213,42 @@ and at the top i can see the thing i needed the most the flag :)\
 so flag is picoCTF{qu1t3_a_v13w_2020}
 
 That was a greattt challenge.
+# 3) m00nwalk-
+
+Alright when i open up the challenge the i am given with a .wav audio file.
+
+![image](https://github.com/user-attachments/assets/37c3e3d2-f555-468f-9980-2e90ecde1391)
+
+the moment i got the file i noticed it had some different type of thing i cant explain it but it gave a hint to check the spectrography of audio.
+
+So i check the spectrography of audio on audacity because in my previous CTFs i ahve found the flag in the spectrographs. However i found nothing in this case.
+
+So i checked the hint which was how the images of moon where sent back to earth.
+
+upon researching a bit about this I found that the images of moon where sent back using sstv singals in which images are sent as audio with headers and the main data.
+
+Anyways now that i know about it I searched up the some softwares to decode sstv signals and found one called MMSSTV.quite an oldschool application.
+
+![image](https://github.com/user-attachments/assets/4ebd9330-8f3c-4075-b094-425bc2596a62)
+
+and woowwww this application is sooooo old and i ran into few issues with this application.
+- Firstly I need to have the audio in .mmv format not .wav
+- Secondly even After I tried to attempt to convert the .wav file to .mmv file.
+
+Because of the above reasons i pretty much gave up and tried a different approach and searched youtube.
+
+and i found a great video which helped me configure the application qsstv on my linux system and i followed the tutorial to configure it.
+
+https://www.youtube.com/watch?v=-fAawZ5849Y&t=365s
+
+after configuring it, I played the sound and the image was generated.
+
+![image](https://github.com/user-attachments/assets/ba811e98-c835-4a62-bcd8-2d080775539a)
+
+and flag was right in front of my eyes.
+
+```
+flag- picoCTF{beep_boop_im_in_space}
+
+```
+
