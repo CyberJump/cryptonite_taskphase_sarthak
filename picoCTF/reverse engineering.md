@@ -1089,6 +1089,168 @@ when i analysed the dump i found that eax register has the value 0x86342 which i
 FLAG-picoCTF{549698}
 
 ```
+# ARMessembly-1
 
+Alr the challenge begins with a long assembly code.
+![image](https://github.com/user-attachments/assets/15bef954-0084-4075-b8a7-4d2a1869c367)
+
+okk then lets see the file and code present in it-
+
+```
+	.arch armv8-a
+	.file	"chall_1.c"
+	.text
+	.align	2
+	.global	func
+	.type	func, %function
+func:
+	sub	sp, sp, #32
+	str	w0, [sp, 12]
+	mov	w0, 81
+	str	w0, [sp, 16]
+	str	wzr, [sp, 20]
+	mov	w0, 3
+	str	w0, [sp, 24]
+	ldr	w0, [sp, 20]
+	ldr	w1, [sp, 16]
+	lsl	w0, w1, w0
+	str	w0, [sp, 28]
+	ldr	w1, [sp, 28]
+	ldr	w0, [sp, 24]
+	sdiv	w0, w1, w0
+	str	w0, [sp, 28]
+	ldr	w1, [sp, 28]
+	ldr	w0, [sp, 12]
+	sub	w0, w1, w0
+	str	w0, [sp, 28]
+	ldr	w0, [sp, 28]
+	add	sp, sp, 32
+	ret
+	.size	func, .-func
+	.section	.rodata
+	.align	3
+.LC0:
+	.string	"You win!"
+	.align	3
+.LC1:
+	.string	"You Lose :("
+	.text
+	.align	2
+	.global	main
+	.type	main, %function
+main:
+	stp	x29, x30, [sp, -48]!
+	add	x29, sp, 0
+	str	w0, [x29, 28]
+	str	x1, [x29, 16]
+	ldr	x0, [x29, 16]
+	add	x0, x0, 8
+	ldr	x0, [x0]
+	bl	atoi
+	str	w0, [x29, 44]
+	ldr	w0, [x29, 44]
+	bl	func
+	cmp	w0, 0
+	bne	.L4
+	adrp	x0, .LC0
+	add	x0, x0, :lo12:.LC0
+	bl	puts
+	b	.L6
+.L4:
+	adrp	x0, .LC1
+	add	x0, x0, :lo12:.LC1
+	bl	puts
+.L6:
+	nop
+	ldp	x29, x30, [sp], 48
+	ret
+	.size	main, .-main
+	.ident	"GCC: (Ubuntu/Linaro 7.5.0-3ubuntu1~18.04) 7.5.0"
+	.section	.note.GNU-stack,"",@progbits
+```
+
+as we can see its pretty long program. Lets see in sections to see whats happening.
+
+```
+sub sp, sp, #32
+    str w0, [sp, 12] 
+    mov w0, 81
+    str w0, [sp, 16] 
+    mov w0, 0
+    str w0, [sp, 20] 
+    mov w0, 3
+    str w0, [sp, 24]
+```
+the value of w0 is stored at [stack+12] and then 81 is moved to w0.
+the value of w0 is now stored at [stack+16] and then 0 is moved to w0.
+the value of w0 is now stored at [stack+20] and then 3 is moved to w0.
+
+now look at the next part of the code
+
+```
+ldr w0, [sp, 20] 
+    ldr w1, [sp, 16] 
+    lsl w0, w1, w0   
+    str w0, [sp, 28] 
+```
+w0 is loaded with [stack+20] value which is 0 and w1 is loaded with [stack+16] which is 81.
+
+now for the lsl which is logical shift left command.
+so the value of 81 shifted by 0 is stored in w0. so w0 is stored with 81.
+now the value 81 is stored in [stack+28].
+
+```
+str	w0, [sp, 28]
+	ldr	w1, [sp, 28]
+	ldr	w0, [sp, 24]
+	sdiv	w0, w1, w0
+    str	w0, [sp, 28]
+```
+now w0 is loaded with 81
+and w1 is loaded with 3.
+now both of them are divided and stored in w0 so 27 is stored in w0.
+now w0 is stored in [stack+28]
+
+all right moving on 
+
+```
+ldr	w1, [sp, 28]
+	ldr	w0, [sp, 12]
+	sub	w0, w1, w0
+	str	w0, [sp, 28]
+	ldr	w0, [sp, 28]
+	add	sp, sp, 32
+	ret
+```
+w1 is loaded with 27 and w0 is loaded with user input. both of these numbers are subtracted then stored in w0 and w0 stored in [stack+28]. now this value is returned.
+
+moving to the main of the program.
+```
+main:
+	stp	x29, x30, [sp, -48]!
+	add	x29, sp, 0
+	str	w0, [x29, 28]
+	str	x1, [x29, 16]
+	ldr	x0, [x29, 16]
+	add	x0, x0, 8
+	ldr	x0, [x0]
+	bl	atoi
+	str	w0, [x29, 44]
+	ldr	w0, [x29, 44]
+	bl	func
+	cmp	w0, 0
+	bne	.L4
+	adrp	x0, .LC0
+	add	x0, x0, :lo12:.LC0
+	bl	puts
+	b	.L6
+```
+here we can see that the cmp function needs 0 or else it will branch to .L4 which branches to LC1 which isnt desired.
+
+so the user input should be 27 to make it 0 and give us win condition.
+
+so the flag must be- `picoCTF{0000001b}`
+
+voilaaa!!!🥳
 
 
