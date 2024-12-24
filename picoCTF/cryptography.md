@@ -577,6 +577,59 @@ now taking the first letter from each place to form the flag and we get.
 picoCTF{KODIAK_ALASKA}
 
 ```
+# 10) Basic-Mod 1
+
+In this challenge we are given space seperated list of numbers and we are asked to map the mod 37 of these numbers.
+
+![image](https://github.com/user-attachments/assets/4fd83707-bd65-41ed-8d39-e37380f5d560)
+
+```
+350,63,353,198,114,369,346,184,202,322,94,235,114,110, 185,188,225,212,366,374,261,213
+```
+these were the list of numbers.
+
+so i created a python script to find flag.
+
+```
+key='ABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789_'
+cip=[350,63,353,198,114,369,346,184,202,322,94,235,114,110, 185,188,225,212,366,374,261,213]
+decry=''
+for i in cip:
+    ind=i%37
+    print(ind)
+    decry+=key[ind]
+print(decry)
+```
+the output of the given program si 
+```
+17
+26
+20
+13
+3
+36
+13
+36
+17
+26
+20
+13
+3
+36
+0
+3
+3
+27
+33
+4
+2
+28
+R0UND_N_R0UND_ADD17EC2
+```
+so the wrapped the flag in picoCTF{} and voilaaa done.
+```
+picoCTF{R0UND_N_R0UND_ADD17EC2}
+```
 
 
 
