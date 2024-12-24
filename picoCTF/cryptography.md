@@ -380,3 +380,25 @@ so the flag is
 ```
 picoCTF{custom_d2cr0pt6d_751a22dc}
 ```
+# 4)Vignere
+
+All right so i already have some knowledge about Vignere cipher but i still searched up some research about it.
+
+For the challenge we are given with the flag as a vignere cipher.
+
+![image](https://github.com/user-attachments/assets/1b0f815c-8d29-46e0-a573-52b923fcc378)
+
+So the cipher given was 
+```
+rgnoDVD{O0NU_WQ3_G1G3O3T3_A1AH3S_cc82272b}
+
+```
+and key given is 
+```
+CYLAB
+```
+
+so well i usually use a tool called dcode.fr to decode ciphers so i saerched dcode and typed in the cipher with the key and got the flag 
+
+```
+picoCTF{D0NT_US3_V1G3N3R3_C1PH3R_ae82272q}
