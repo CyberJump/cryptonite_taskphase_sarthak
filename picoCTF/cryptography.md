@@ -402,3 +402,48 @@ so well i usually use a tool called dcode.fr to decode ciphers so i saerched dco
 
 ```
 picoCTF{D0NT_US3_V1G3N3R3_C1PH3R_ae82272q}
+
+# 5) HideToSee
+
+For this challenge we are given with an image and hints says we have to extract it
+
+![image](https://github.com/user-attachments/assets/3f4aefad-9fd3-4537-8155-db75c68b6896)
+
+so i downloaded it and the image was like a the key to encryption however no text was given.
+
+![atbash](https://github.com/user-attachments/assets/bb944997-9227-4256-a365-7f7a3fb612d8)
+
+so the first thing i did was to use an online tool used to do all type of analysis of an image.
+![image](https://github.com/user-attachments/assets/1d5c9090-d4e5-4c52-9ce6-3985003f4da7)
+
+when i saw the steghide section i see a encryption.txt in it so i downloaded the zip file and extracted the txt file. and found a crypted flag.
+
+```
+krxlXGU{zgyzhs_xizxp_zx751vx6}
+```
+
+so to dicipher it  wrote a python code 
+
+```
+Cipher = "krxlXGU{zgyzhs_xizxp_zx751vx6}"
+cipher1=Cipher.lower()
+key="abcdefghijklmnopqrstuvwxyz"
+decrypt=''
+for i in cipher1:
+    if i in key:
+        ind=len(key)-1-key.index(i)
+        decrypt+=key[ind]
+    else:
+        decrypt+=i
+    
+    
+print(decrypt)
+
+```
+which gave me the flag as an output
+
+```
+picoctf{atbash_crack_ac751ec6}
+
+```
+
