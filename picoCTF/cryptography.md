@@ -447,4 +447,78 @@ which gave me the flag as an output
 picoctf{atbash_crack_ac751ec6}
 
 ```
+# 6)ReadMyCert
+
+![image](https://github.com/user-attachments/assets/13736dfa-1634-4d18-b236-d56818916462)
+
+so for this challenge we are given a certificate signing request. though i dont know anyhting about it. so searched up google what is CSR.
+
+```
+-----BEGIN CERTIFICATE REQUEST-----
+MIICpzCCAY8CAQAwPDEmMCQGA1UEAwwdcGljb0NURntyZWFkX215Y2VydF82OTNm
+N2MwM30xEjAQBgNVBCkMCWN0ZlBsYXllcjCCASIwDQYJKoZIhvcNAQEBBQADggEP
+ADCCAQoCggEBAPp+XuDB3ZkmrkvAsgtjP+mjIcYDWfptuZsJieu6eRl39wl4Sg38
++/OfY24LV9sNmgKyTGvpmCaUoZMYkvkulYSoFzE0xqPBo6kruLEyIvqqpAFqRH2b
+mierLT6RcKgJHYr/Vt6SwP8NCCawCrvhQ4NZcuB49Hr/2AiGHzmf86/lG/c+lhmH
+gyqPb1kDghsVxi/GNs9i7AgniZikqT8OTp0INmmCgZtJn1Jo615Iu/tFiC8Sfhhg
+QHmTDLjgx1oP1kvZV2PE5UUN/oC05Zup8f31LksXZwpazZKwYC/LbN96HdqgVQ9K
+S8e/4I7MJQmPmLIsLp3sdL2FiDGML3smAi0CAwEAAaAmMCQGCSqGSIb3DQEJDjEX
+MBUwEwYDVR0lBAwwCgYIKwYBBQUHAwIwDQYJKoZIhvcNAQELBQADggEBAOxSR8Fs
+Tdjfu9e0vRNqKWd09ISmYDQc3qnSbLRlYZyMK4pguALq310h/1nNgURWESbNJPOp
+FkBWG0XWhWyWP7rTqxo/pk9AKx0TNbHDrS6KiBnKPq0mxjPZsH1L7wNYDc5OANDl
+btvn3zT7lMms6z1qM7xUWXR76n2xL/81cdF725nBZ00mWmPW0S1pSmA4EEHCEgNW
+0vWQqsIDki3gYc4NCm8OHjx79kcwE+ksyc6vHgMOwsYoOFJnyayhl15oN/3x7hW3
+G1xovPupABpfOSNOcTwbgfrfjUDOLx/wirvj9L1N5EGDh4FOLaRZDs+tMrimGBBS
+zGU13BnykmQ5jOQ=
+-----END CERTIFICATE REQUEST-----
+
+```
+so i found the wikipedia page and gone through the website to find what kind of encoding this is 
+
+Firstly, i thought it was Base64 encoded however when i used a online decoder. I was wrong.
+
+Then dove deeper into the website and found out that its encoded as ASN-1. I used a online ASN-1 decoder.
+
+```
+SEQUENCE
+    SEQUENCE
+        INTEGER: 0
+        SEQUENCE
+            DER SET
+                SEQUENCE
+                    OBJECTIDENTIFIER: 2.5.4.3 (commonName)
+                    UTF8String: picoCTF{read_mycert_693f7c03}
+            DER SET
+                SEQUENCE
+                    OBJECTIDENTIFIER: 2.5.4.41 (2.5.4.41)
+                    UTF8String: ctfPlayer
+        SEQUENCE
+            SEQUENCE
+                OBJECTIDENTIFIER: 1.2.840.113549.1.1.1 (rsa-Encryption)
+                NULL
+            BIT STRING: 
+0x 30 82 01 0A 02 82 01 01 00 FA 7E 5E E0 C1 DD 99 26 AE 4B C0 B2 0B 63 3F E9 A3 21 C6 03 59 FA 6D B9 9B 09 89 EB BA 79 19 77 F7 09 78 4A 0D FC FB F3 9F 63 6E 0B 57 DB 0D 9A 02 B2 4C 6B E9 98 26 94 A1 93 18 92 F9 2E 95 84 A8 17 31 34 C6 A3 C1 A3 A9 2B B8 B1 32 22 FA AA A4 01 6A 44 7D 9B 9A 27 AB 2D 3E 91 70 A8 09 1D 8A FF 56 DE 92 C0 FF 0D 08 26 B0 0A BB E1 43 83 59 72 E0 78 F4 7A FF D8 08 86 1F 39 9F F3 AF E5 1B F7 3E 96 19 87 83 2A 8F 6F 59 03 82 1B 15 C6 2F C6 36 CF 62 EC 08 27 89 98 A4 A9 3F 0E 4E 9D 08 36 69 82 81 9B 49 9F 52 68 EB 5E 48 BB FB 45 88 2F 12 7E 18 60 40 79 93 0C B8 E0 C7 5A 0F D6 4B D9 57 63 C4 E5 45 0D FE 80 B4 E5 9B A9 F1 FD F5 2E 4B 17 67 0A 5A CD 92 B0 60 2F CB 6C DF 7A 1D DA A0 55 0F 4A 4B C7 BF E0 8E CC 25 09 8F 98 B2 2C 2E 9D EC 74 BD 85 88 31 8C 2F 7B 26 02 2D 02 03 01 00 01 :0 unused bit(s)
+        [0]
+            DER SEQUENCE
+                OBJECTIDENTIFIER: 1.2.840.113549.1.9.14 (1.2.840.113549.1.9.14)
+                DER SET
+                    DER SEQUENCE
+                        DER SEQUENCE
+                            OBJECTIDENTIFIER: 2.5.29.37 (extKeyUsage)
+                            DER OCTET STRING: 300a06082b06010505070302
+    SEQUENCE
+        OBJECTIDENTIFIER: 1.2.840.113549.1.1.11 (SHA-256-WITH-RSA)
+        NULL
+    BIT STRING: 
+0x EC 52 47 C1 6C 4D D8 DF BB D7 B4 BD 13 6A 29 67 74 F4 84 A6 60 34 1C DE A9 D2 6C B4 65 61 9C 8C 2B 8A 60 B8 02 EA DF 5D 21 FF 59 CD 81 44 56 11 26 CD 24 F3 A9 16 40 56 1B 45 D6 85 6C 96 3F BA D3 AB 1A 3F A6 4F 40 2B 1D 13 35 B1 C3 AD 2E 8A 88 19 CA 3E AD 26 C6 33 D9 B0 7D 4B EF 03 58 0D CE 4E 00 D0 E5 6E DB E7 DF 34 FB 94 C9 AC EB 3D 6A 33 BC 54 59 74 7B EA 7D B1 2F FF 35 71 D1 7B DB 99 C1 67 4D 26 5A 63 D6 D1 2D 69 4A 60 38 10 41 C2 12 03 56 D2 F5 90 AA C2 03 92 2D E0 61 CE 0D 0A 6F 0E 1E 3C 7B F6 47 30 13 E9 2C C9 CE AF 1E 03 0E C2 C6 28 38 52 67 C9 AC A1 97 5E 68 37 FD F1 EE 15 B7 1B 5C 68 BC FB A9 00 1A 5F 39 23 4E 71 3C 1B 81 FA DF 8D 40 CE 2F 1F F0 8A BB E3 F4 BD 4D E4 41 83 87 81 4E 2D A4 59 0E CF AD 32 B8 A6 18 10 52 CC 65 35 DC 19 F2 92 64 39 8C E4 :0 unused bit(s)
+```
+this was the decoded CSR. and flag was in this.
+
+```
+picoCTF{read_mycert_693f7c03}
+
+```
+
+
+
 
