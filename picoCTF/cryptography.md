@@ -547,6 +547,36 @@ i used bruteforce to check for all combinations and found a hit.
 ```
 picoCTF{crossingtherubiconvfhsjkou}
 ```
+# 9) Mr-Worldwide
+
+so the challenge is given with a text message.
+
+```
+picoCTF{(35.028309, 135.753082)(46.469391, 30.740883)(39.758949, -84.191605)(41.015137, 28.979530)(24.466667, 54.366669)(3.140853, 101.693207)_(9.005401, 38.763611)(-3.989038, -79.203560)(52.377956, 4.897070)(41.085651, -73.858467)(57.790001, -152.407227)(31.205753, 29.924526)}
+```
+okk this seems preety straight forward as i could recognise that these are coordinates to different places. i searched them all up on gmaps and listed them down.
+
+```
+Kyoto, Japan
+Odessa, Ukraine
+Dayton, Ohio, USA
+Istanbul, Turkey
+Abu Dhabi, UAE
+Kuala Lumpur, Malaysia
+Addis Ababa, Ethiopia
+Loja, Ecuador
+Amsterdam, Netherlands
+Sleepy Hollow, NY, USA
+Kodiak, Alaska, USA
+Alexandria, Egypt
+```
+
+now taking the first letter from each place to form the flag and we get.
+
+```
+picoCTF{KODIAK_ALASKA}
+
+```
 
 
 
