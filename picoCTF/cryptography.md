@@ -518,6 +518,21 @@ this was the decoded CSR. and flag was in this.
 picoCTF{read_mycert_693f7c03}
 
 ```
+# 7) Rotation-
+
+For this challenge we are given with encrypted text which seems to be like the flag.
+
+```
+xqkwKBN{z0bib1wv_l3kzgxb3l_7l140864}
+```
+so i tried the dcode.fr tool to decode it.
+Hint given was that ciphered using Rotation
+
+so tried each ROT and got a match at ROT8.
+
+```
+picoCTF{r0tat1on_d3crypt3d_7d140864}
+```
 
 
 
